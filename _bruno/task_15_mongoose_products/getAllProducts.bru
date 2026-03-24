@@ -1,0 +1,17 @@
+meta {
+  name: getAllProducts
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/products?category=stuff&sortby=price&sort=asc
+  body: none
+  auth: none
+}
+
+params:query {
+  category: stuff
+  sortby: price
+  sort: asc
+}
