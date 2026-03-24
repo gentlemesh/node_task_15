@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { config as loadEnv } from 'dotenv';
 
+import productRouter from './routes/products.js';
+
 loadEnv();
 
 const app = express();
@@ -25,3 +27,5 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
+
+app.use('/products/', productRouter);

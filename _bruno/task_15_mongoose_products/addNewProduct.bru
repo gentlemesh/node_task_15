@@ -1,0 +1,23 @@
+meta {
+  name: addNewProduct
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/products
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Discombobulator",
+    "price": {{randomPrice}},
+    "category": "stuff"
+  }
+}
+
+script:pre-request {
+  bru.setVar('randomPrice', (Math.random() * 1000).toFixed(2));
+}

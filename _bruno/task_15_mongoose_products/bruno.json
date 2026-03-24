@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "task_15_mongoose_products",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
