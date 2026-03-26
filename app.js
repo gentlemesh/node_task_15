@@ -4,6 +4,7 @@ import { config as loadEnv } from 'dotenv';
 
 import connectDB from './db/connect.js';
 import productRouter from './routes/products.js';
+import categoryRouter from './routes/categories.js';
 
 loadEnv();
 
@@ -15,7 +16,7 @@ const port = process.env.PORT || 3333;
 app.listen(port, async () => {
     try {
         await connectDB();
-    console.log(`Server is running on ${host}:${port}`);
+        console.log(`Server is running on ${host}:${port}`);
     } catch (err) {
         console.error('Cannot start server: ', err);
     }
@@ -24,3 +25,4 @@ app.listen(port, async () => {
 app.use(express.json());
 
 app.use('/products/', productRouter);
+app.use('/categories/', categoryRouter);
