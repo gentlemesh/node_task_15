@@ -37,6 +37,8 @@ router.get('/', async (req, res) => {
 
         return res.json({ products });
     } catch (err) {
+        console.log('Error on getting products: ', err);
+
         return res.status(500).json({ message: 'Failed to get products' });
     }
 });
@@ -55,7 +57,7 @@ router.post('/', async (req, res) => {
 
         res.status(201).json({ product: newProduct });
     } catch (err) {
-        console.log(err);
+        console.log('Error on adding product: ', err);
 
         return res.status(400).json({ message: 'Failed to create product' });
     }
@@ -82,7 +84,7 @@ router.put('/:id', async (req, res) => {
 
         res.json({ message: 'Product has been updated', updatedProduct });
     } catch (err) {
-        console.log(err);
+        console.log('Error on updating product: ', err);
 
         return res.status(500).json({ message: 'Failed to update product' });
     }
@@ -99,7 +101,7 @@ router.delete('/:id', async (req, res) => {
 
         res.json({ message: 'Product has been deleted' });
     } catch (err) {
-        console.log(err);
+        console.log('Error on deleting product: ', err);
 
         return res.status(500).json({ message: 'Failed to delete product' });
     }
