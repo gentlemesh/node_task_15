@@ -5,15 +5,17 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/products?category=stuff&sortby=price&sort=asc
+  url: {{baseUrl}}/products?sortby=price&sort=asc&category=Electronics
   body: none
   auth: none
 }
 
 params:query {
-  category: stuff
   sortby: price
   sort: asc
+  category: Electronics
+  ~category: stuff
+  ~category: Books
 }
 
 script:post-response {

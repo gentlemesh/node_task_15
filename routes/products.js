@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 
+import Category from '../models/Category.js';
 import Product from '../models/Product.js';
 
 const router = Router();
@@ -24,7 +25,13 @@ router.get('/', async (req, res) => {
 
     const filter = {};
     if (category) {
-        filter.category = category;
+        const categoryExists = await Category.exists({ name: category });
+        if (!categoryExists) {
+            return res.status(422).json({ message: `Category "${category}" does not exist` });
+        }
+
+        const categoryItem = await Category.findOne({ name: category }).select({});
+        filter.category = categoryItem._id;
     }
 
     const query = Product.find(filter);
@@ -33,7 +40,7 @@ router.get('/', async (req, res) => {
     }
 
     try {
-        const products = await query.exec();
+        const products = await query.populate('category').exec();
 
         return res.json({ products });
     } catch (err) {
