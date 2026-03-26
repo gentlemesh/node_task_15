@@ -50,6 +50,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!mongoose.isValidObjectId(id)) {
+        return res.status(422).json({ message: 'Invalid product id' });
+    }
+
+    try {
+        const product = await Product.findById(id).populate('category').exec();
+
+        return res.json({ product });
+    } catch (err) {
+        console.log('Error on getting product by id: ', err);
+
+        return res.status(500).json({ message: 'Failed to get product by id' });
+    }
+});
+
 router.post('/', async (req, res) => {
     const { name, price, category } = req.body || {};
     if (!name) {
