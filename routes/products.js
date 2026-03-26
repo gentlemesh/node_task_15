@@ -88,4 +88,21 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!mongoose.isValidObjectId(id)) {
+        return res.status(422).json({ message: 'Invalid product id' });
+    }
+
+    try {
+        await Product.findByIdAndDelete(id);
+
+        res.json({ message: 'Product has been deleted' });
+    } catch (err) {
+        console.log(err);
+
+        return res.status(500).json({ message: 'Failed to delete product' });
+    }
+});
+
 export default router;
