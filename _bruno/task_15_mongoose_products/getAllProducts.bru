@@ -15,3 +15,10 @@ params:query {
   sortby: price
   sort: asc
 }
+
+script:post-response {
+  if (res.body.products && res.body.products.length > 0) {
+    bru.setVar('firstProductId', res.body.products[0]._id);
+    bru.setVar('firstProductName', res.body.products[0].name);
+  }
+}

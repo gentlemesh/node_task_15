@@ -1,0 +1,22 @@
+meta {
+  name: updateFirstProduct
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/products/{{firstProductId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "{{firstProductName}} - updated",
+    "price": {{randomPrice}}
+  }
+}
+
+script:pre-request {
+  bru.setVar('randomPrice', (Math.random() * 1000).toFixed(2));
+}
